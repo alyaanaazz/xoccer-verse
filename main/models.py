@@ -1,7 +1,7 @@
 import uuid
 from django.db import models
 
-class Products(models.Model):
+class Item(models.Model):
     CATEGORY_CHOICES = [
         ('transfer', 'Transfer'),
         ('update', 'Update'),
@@ -11,8 +11,7 @@ class Products(models.Model):
         ('analysis', 'Analysis'),
     ]
     
-    product_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    name = models.CharField(max_length=50)
+    name = models.CharField(max_length=100)
     price = models.IntegerField()
     description = models.TextField()
     thumbnail = models.URLField(blank=True, null=True)
@@ -22,7 +21,7 @@ class Products(models.Model):
     brand = models.TextField()
     rating = models.FloatField(default=0.0)
     def __str__(self):
-        return self.title
+        return self.name
     
     @property
     def is_hot_sale(self):
