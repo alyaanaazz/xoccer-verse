@@ -7,8 +7,8 @@ NPM   : 2406425924
 Kelas : PBP C
 ```
 
-Tautan menuju aplikasi PWS yang sudah di deploy : `https://nisrina-alya-xoccerverse.pbp.cs.ui.ac.id/`
-Tautan menuju github : `https://github.com/alyaanaazz/xoccer-verse`
+Tautan menuju aplikasi PWS yang sudah di deploy : https://nisrina-alya-xoccerverse.pbp.cs.ui.ac.id/
+Tautan menuju github : https://github.com/alyaanaazz/xoccer-verse
 
 ### 1. Menjelaskan bagaimana mengimplementasikan **checklist secara step-by-step**
 - Saya memulai proyek ini dengan membuat folder terlebih dahulu melalu terminal / command prompt kemudian menginisiasi direktori yang buat ke repository kosong dengan command:
@@ -21,13 +21,19 @@ Tautan menuju github : `https://github.com/alyaanaazz/xoccer-verse`
     ```
 
 - Setelah membuat direktori baru, saya mengaktifkan Virtual Environment (env) untuk mengisolasi package serta dependencies dari aplikasi agar tidak bertabrakan dengan versi lain yang ada pada device saya dengan command:
-    ```env\Scripts\activate```
+    ```
+    env\Scripts\activate
+    ```
 
 - Setelah mengaktifkan environment, di dalam direktori `xoccer-verse` saya membuat file `requirements.txt` dan menambahkan beberapa dependencies yang dipisahkan di masing-masing line. kemudian saya melakukan instalasi terhadap dependencies yang ada di berkas `requirements.txt` dengan command:
-    ```pip install -r requirements.txt```
+    ```
+    pip install -r requirements.txt
+    ```
 
 - Setelahnya, saya membuat proyek django untuk project saya yang bernama `xoccer_verse` dengan command:
-    ```django-admin startproject xoccer_verse .```
+    ```
+    django-admin startproject xoccer_verse .
+    ```
 
 Setelah membuat proyek Django dengan command tersebut, Django akan membuat struktur direktori dengan folder utama `xoccer_verse` berisi file `settings.py`, `urls.py`, dan lain-lain, serta file `manage.py` di luar folder tersebut.
 
@@ -64,8 +70,10 @@ setelah itu, folder baru bernama `main` terbentuk dengan struktur `models.py`, `
 model ini merepresentasikan barang yang dijual di app saya.
 
 - Melakukan migrasi database supaya struktur database sesuai dengan model yang sudah dibuat dengan command:
-    ```python manage.py makemigrations```
-    ```python manage.py migrate```
+    ```
+    python manage.py makemigrations
+    python manage.py migrate
+    ```
 
 - Menambahkan URL routing, dengan membuat file `urls.py` di direktori `main` untuk mapping views nya dengan melakukan:
     ```
@@ -80,7 +88,9 @@ model ini merepresentasikan barang yang dijual di app saya.
     ```
 
 - Untuk melakukan test sementara untuk memastikan apakah app nya works, saya menjalankan 
-    ```python manage.py runserver```
+    ```
+    python manage.py runserver
+    ```
 
 - selanjutnya, setelah memastikan app saya berjalan lancar, saya membuat file `.gitignore` dan mulai menginisialisasikan ke `Github` supaya file file confidential (seperti env, etc.) tidak ikut ter-push di github saya, lalu melakukan inisialisasi repository ke Github.
 
@@ -90,7 +100,7 @@ model ini merepresentasikan barang yang dijual di app saya.
 
 - Selanjutnya saya menambahkan konfigurasi untuk `memulai deployment ke PWS`.
 
-- setelah berhasil melalui proses deployment di PWS, situs web saya untuk Tugas 2 ini sudah siap dikumpulkan melalui tautan berikut : `https://nisrina-alya-xoccerverse.pbp.cs.ui.ac.id/`
+- setelah berhasil melalui proses deployment di PWS, situs web saya untuk Tugas 2 ini sudah siap dikumpulkan melalui tautan berikut : https://nisrina-alya-xoccerverse.pbp.cs.ui.ac.id/
 
 - Hampir lupa bikin unit test :p, jadi saya melanjutkan bikin Unit Testing untuk menguji halaman utama, menguji jika client mengakses url yang tidak ada maka Django akan mengeluarkan kode `404 (Not Found)`, menguji pembuatan objek item baru dengan atribut tertentu, menguji nilai default dari model Item, menguji fungsionalitas method `increment_views()`, serta menguji properti `is_hot_sale()` dengan 21 views dianggap hot sale.
 
@@ -120,7 +130,9 @@ Contoh output:
         + Create model Products
     ```
 Pada tahap ini, Django akan memindai model saya, kemudian membandingkan dengan versi yang tersimpan pada berkas migrasi sebelumnya, lalu membuat berkas migrasi baru. Hal yang harus dipastikan ketika membuat migrasi adalah selalu membaca hasil outputnya untuk memastikan perubahan yang terdeteksi sesuai dengan yang diharapkan. Setelah file migrasi berhasil dibuat, jalankan perintah berikut untuk menerapkan migrasi ke database:
-    ```python manage.py migrate```
+    ```
+    python manage.py migrate
+    ```
 Contoh keluaran:
     ```
     Operations to perform:
