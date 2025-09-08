@@ -1,17 +1,19 @@
 # TUGAS INDIVIDU 2
 ## PBP 2025/2026
 
+```
 Nama  : Nisrina Alya Nabilah
 NPM   : 2406425924
 Kelas : PBP C
+```
 
-Tautan menuju aplikasi PWS yang sudah di deploy : https://nisrina-alya-xoccerverse.pbp.cs.ui.ac.id/
-
-[tautan github : https://github.com/alyaanaazz/xoccer-verse]
+Tautan menuju aplikasi PWS yang sudah di deploy : `https://nisrina-alya-xoccerverse.pbp.cs.ui.ac.id/`
+Tautan menuju github : `https://github.com/alyaanaazz/xoccer-verse`
 
 ### 1. Menjelaskan bagaimana mengimplementasikan **checklist secara step-by-step**
-- Saya memulai proyek ini dengan membuat folder terlebih dahulu melalu terminal atau command prompt kemudian menginisiasi direktori yang buat ke repository kosong dengan command:
-    ```C:\Users\nisri>D:
+- Saya memulai proyek ini dengan membuat folder terlebih dahulu melalu terminal / command prompt kemudian menginisiasi direktori yang buat ke repository kosong dengan command:
+    ```
+    C:\Users\nisri>D:
     D:\>cd "FASILKOM UI"
     D:\FASILKOM UI>mkdir xoccer-verse
     D:\FASILKOM UI>cd xoccer-verse
@@ -25,8 +27,8 @@ Tautan menuju aplikasi PWS yang sudah di deploy : https://nisrina-alya-xoccerver
     ```pip install -r requirements.txt```
 
 - Setelahnya, saya membuat proyek django untuk project saya yang bernama `xoccer_verse` dengan command:
-    ```django-admin startproject xoccer_verse .
-    ```
+    ```django-admin startproject xoccer_verse .```
+
 Setelah membuat proyek Django dengan command tersebut, Django akan membuat struktur direktori dengan folder utama `xoccer_verse` berisi file `settings.py`, `urls.py`, dan lain-lain, serta file `manage.py` di luar folder tersebut.
 
 - Selanjutnya, saya perlu memisahkan fitur ke dalam modul, karena itu, saya membuat apo bernama `main` dengan command:
@@ -36,13 +38,16 @@ Setelah membuat proyek Django dengan command tersebut, Django akan membuat struk
 setelah itu, folder baru bernama `main` terbentuk dengan struktur `models.py`, `views.py`, `tests.py`, dan `apps.py`.
 
 - Selanjutnya, supaya app `main` dapat dikenali oleh project, saya menambahkan `main` pada variable `INSTALLED_APPS` di file `xoccer_verse/settings.py`:
+    ```
     INSTALLED_APPS = [
         ...,
         'main',
     ]
+    ```
 
 - Pada `main/models.py`, saya membuat model `Item` dengan atribut berikut:
-    ```class Item(models.Model):
+    ``` 
+    class Item(models.Model):
         name = models.CharField(max_length=100)
         price = models.IntegerField()
         description = models.TextField()
@@ -59,18 +64,20 @@ setelah itu, folder baru bernama `main` terbentuk dengan struktur `models.py`, `
 model ini merepresentasikan barang yang dijual di app saya.
 
 - Melakukan migrasi database supaya struktur database sesuai dengan model yang sudah dibuat dengan command:
-    python manage.py makemigrations
-    python manage.py migrate
+    ```python manage.py makemigrations```
+    ```python manage.py migrate```
 
 - Menambahkan URL routing, dengan membuat file `urls.py` di direktori `main` untuk mapping views nya dengan melakukan:
-    ```from django.contrib import admin
+    ```
+    from django.contrib import admin
     from django.urls import path
     from django.urls import path, include
 
     urlpatterns = [
         path('admin/', admin.site.urls),
         path('', include('main.urls')),
-    ]```
+    ]
+    ```
 
 - Untuk melakukan test sementara untuk memastikan apakah app nya works, saya menjalankan 
     ```python manage.py runserver```
@@ -107,14 +114,16 @@ model ini merepresentasikan barang yang dijual di app saya.
 - Setelah saya melakukan perubahan pada model, misalnya menambahkan atau menghapus model lama, saya akan menjalankan perintah berikut untuk membuat migrasi:
     ```python manage.py makemigrations```
 Contoh output:
-    ```Migrations for 'main':
+    ```
+    Migrations for 'main':
     main\migrations\0001_initial.py
         + Create model Products
     ```
 Pada tahap ini, Django akan memindai model saya, kemudian membandingkan dengan versi yang tersimpan pada berkas migrasi sebelumnya, lalu membuat berkas migrasi baru. Hal yang harus dipastikan ketika membuat migrasi adalah selalu membaca hasil outputnya untuk memastikan perubahan yang terdeteksi sesuai dengan yang diharapkan. Setelah file migrasi berhasil dibuat, jalankan perintah berikut untuk menerapkan migrasi ke database:
     ```python manage.py migrate```
 Contoh keluaran:
-    ```Operations to perform:
+    ```
+    Operations to perform:
     Apply all migrations: admin, auth, contenttypes, main, sessions
     Running migrations:
     Applying main.0001_initial... OK
@@ -124,5 +133,5 @@ Jika migrasi sudah diterapkan dengan baik, commit perubahan model dan berkas mig
 ### 5. Pendapat pribadi terkait alasan framework Django yang dijadikan permulaan pembelajaran pengembangan perangkat lunak dari semua framework yang ada
 - Menurut saya, Django dijadikan permulaan dalam pembelajaran pengembangan perangkat lunak karena framework ini lengkap (batteries included) dan terstruktur, sehingga mahasiswa bisa langsung fokus mempelajari konsep inti seperti arsitektur MVT, manajemen database dengan ORM, serta best practice dalam pemisahan logika bisnis, data, dan tampilan tanpa harus repot dengan mengintegrasikan banyak library. Django juga menyediakan fitur keamanan bawaan, dokumentasi yang sangat lengkap, serta komunitas yang besar sehingga memudahkan pemula seperti mahasiswa yang baru memulai journey nya di dunia pengembangan perangkat lunak untuk mencari referensi dan solusi. Selain itu, dengan Django mahasiswa dapat membangun framework web end-to-end mulai dari model, backend, hingga interface sederhana, menjadikannya sarana belajar yang relevan di industri karena banyak digunakan untuk aplikasi berskala besar yang membutuhkan keamanan, kecepatan pengembangan, dan skalabilitas.
 
-### 6. Feedback unutk asisten dosen tutorial 1 yang sudah saya kerjakan sebelumnya.
+### 6. Feedback umtuk asisten dosen tutorial 1 yang sudah saya kerjakan sebelumnya.
 - Thank you so much buat Kak Farrell yang selalu ngecek update-an tutorial dari asdosannya walaupun online😭 Dan untuk Tugas 2 ini, shout out juga buat Kak Farrell, karena fast-respond dan sabar banget jawabin nya. Big thanks dan respeecttt kaakk, semoga sehat selalu.
