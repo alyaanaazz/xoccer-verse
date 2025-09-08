@@ -135,7 +135,8 @@ Pada tahap ini, Django akan memindai model saya, kemudian membandingkan dengan v
     ```
 
 Contoh keluaran:
-    ```Operations to perform:
+    ```
+    Operations to perform:
     Apply all migrations: admin, auth, contenttypes, main, sessions
     Running migrations:
     Applying main.0001_initial... OK
