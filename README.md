@@ -130,18 +130,18 @@ Contoh output:
         + Create model Products
     ```
 Pada tahap ini, Django akan memindai model saya, kemudian membandingkan dengan versi yang tersimpan pada berkas migrasi sebelumnya, lalu membuat berkas migrasi baru. Hal yang harus dipastikan ketika membuat migrasi adalah selalu membaca hasil outputnya untuk memastikan perubahan yang terdeteksi sesuai dengan yang diharapkan. Setelah file migrasi berhasil dibuat, jalankan perintah berikut untuk menerapkan migrasi ke database:
-
     ```
     python manage.py migrate
     ```
-Contoh keluaran:
 
+Contoh keluaran:
     ```
     Operations to perform:
     Apply all migrations: admin, auth, contenttypes, main, sessions
     Running migrations:
     Applying main.0001_initial... OK
     ```
+    
 Jika migrasi sudah diterapkan dengan baik, commit perubahan model dan berkas migrasi tersebut ke dalam sistem kontrol (github atau pws) dalam satu commit. Dengan begitu, jika ada developer lain (atau server production) yang menarik code tersebut akan langsung mendapatkan model yang telah diperbarui beserta migrasinya.
 
 ### 5. Pendapat pribadi terkait alasan framework Django yang dijadikan permulaan pembelajaran pengembangan perangkat lunak dari semua framework yang ada
