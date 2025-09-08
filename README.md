@@ -8,6 +8,7 @@ Kelas : PBP C
 ```
 
 Tautan menuju aplikasi PWS yang sudah di deploy : https://nisrina-alya-xoccerverse.pbp.cs.ui.ac.id/
+
 Tautan menuju github : https://github.com/alyaanaazz/xoccer-verse
 
 ### 1. Menjelaskan bagaimana mengimplementasikan **checklist secara step-by-step**
