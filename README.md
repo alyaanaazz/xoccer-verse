@@ -130,10 +130,12 @@ Contoh output:
         + Create model Products
     ```
 Pada tahap ini, Django akan memindai model saya, kemudian membandingkan dengan versi yang tersimpan pada berkas migrasi sebelumnya, lalu membuat berkas migrasi baru. Hal yang harus dipastikan ketika membuat migrasi adalah selalu membaca hasil outputnya untuk memastikan perubahan yang terdeteksi sesuai dengan yang diharapkan. Setelah file migrasi berhasil dibuat, jalankan perintah berikut untuk menerapkan migrasi ke database:
+
     ```
     python manage.py migrate
     ```
 Contoh keluaran:
+
     ```
     Operations to perform:
     Apply all migrations: admin, auth, contenttypes, main, sessions
