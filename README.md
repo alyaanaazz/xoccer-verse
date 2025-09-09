@@ -8,6 +8,7 @@ Kelas : PBP C
 ```
 
 Tautan menuju aplikasi PWS yang sudah di deploy : https://nisrina-alya-xoccerverse.pbp.cs.ui.ac.id/
+
 Tautan menuju github : https://github.com/alyaanaazz/xoccer-verse
 
 ### 1. Menjelaskan bagaimana mengimplementasikan **checklist secara step-by-step**
@@ -135,7 +136,8 @@ Pada tahap ini, Django akan memindai model saya, kemudian membandingkan dengan v
     ```
 
 Contoh keluaran:
-    ```Operations to perform:
+    ```
+    Operations to perform:
     Apply all migrations: admin, auth, contenttypes, main, sessions
     Running migrations:
     Applying main.0001_initial... OK
