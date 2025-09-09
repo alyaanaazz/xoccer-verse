@@ -1,5 +1,5 @@
 from django.test import TestCase, Client
-from .models import Item
+from .models import Product
 
 class MainTest(TestCase):
     def test_main_url_is_exist(self):
@@ -15,7 +15,7 @@ class MainTest(TestCase):
         self.assertEqual(response.status_code, 404)
 
     def test_item_creation(self):
-        item = Item.objects.create(
+        item = Product.objects.create(
             name="Real Madrid Jersey",
             description="Official Real Madrid home jersey for the latest season.",
             category="jersey",
@@ -28,7 +28,7 @@ class MainTest(TestCase):
         self.assertEqual(item.name, "Real Madrid Jersey")
         
     def test_item_default_values(self):
-        item = Item.objects.create(
+        item = Product.objects.create(
             name="Test Ball",
             description="Test ball description"
         )
@@ -38,7 +38,7 @@ class MainTest(TestCase):
         self.assertFalse(item.is_hot_sale)
         
     def test_increment_views(self):
-        item = Item.objects.create(
+        item = Product.objects.create(
             name="Ball",
             description="Round football"
         )
@@ -47,14 +47,14 @@ class MainTest(TestCase):
         self.assertEqual(item.item_views, initial_views + 1)
         
     def test_is_hot_sale_threshold(self):
-        item_20 = Item.objects.create(
+        item_20 = Product.objects.create(
             name="Jersey with 20 views",
             description="Test desc",
             item_views=20
         )
         self.assertFalse(item_20.is_hot_sale)
         
-        item_21 = Item.objects.create(
+        item_21 = Product.objects.create(
             name="Jersey with 21 views",
             description="Test desc",
             item_views=21
