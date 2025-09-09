@@ -60,3 +60,5 @@ class MainTest(TestCase):
             item_views=21
         )
         self.assertTrue(item_21.is_hot_sale)
+    
+'''last commit: updating class name (Item -> Product)'''
