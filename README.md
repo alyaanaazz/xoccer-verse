@@ -1,14 +1,16 @@
-# TUGAS INDIVIDU 2
-## PBP 2025/2026
+# PBP 2025/2026
 
 ```
 Nama  : Nisrina Alya Nabilah
 NPM   : 2406425924
 Kelas : PBP C
 ```
+<details>
+<summary><b>Tugas Individu 2</b></summary>
+
+## TUGAS INDIVIDU 2
 
 Tautan menuju aplikasi PWS yang sudah di deploy : https://nisrina-alya-xoccerverse.pbp.cs.ui.ac.id/
-
 Tautan menuju github : https://github.com/alyaanaazz/xoccer-verse
 
 ### 1. Menjelaskan bagaimana mengimplementasikan **checklist secara step-by-step**
@@ -150,3 +152,162 @@ Jika migrasi sudah diterapkan dengan baik, commit perubahan model dan berkas mig
 
 ### 6. Feedback umtuk asisten dosen tutorial 1 yang sudah saya kerjakan sebelumnya.
 - Thank you so much buat Kak Farrell yang selalu ngecek update-an tutorial dari asdosannya walaupun online😭 Dan untuk Tugas 2 ini, shout out juga buat Kak Farrell, karena fast-respond dan sabar banget jawabin nya. Big thanks dan respeecttt kaakk, semoga sehat selalu.
+</details>
+
+---
+
+
+## TUGAS INDIVIDU 3
+
+### 1. Mengapa kita memerlukan data delivery dalam pengimplementasian sebuah platform?
+- Data delivery diperlukan dalam mengimplementasikan sebuah platform karena data delivery memungkinkan developer untuk mengirim data dari server ke client dengan cepat dan efisien. Data delivery juga digunakna ketika kita perlu mengirimkan data dalam berbagai format seperti XML, JSON, dan format data lainnya. Data delivery juga membuat aplikasi web menjadi lebih responsif dan interaktif, karena data dapat diambil dan ditampilkan secara real-time.
+Data delivery juga memungkinkan developer untuk mengirim data ke berbagai perangkat seperti desktop, mobile, dan tablet. Dengan menggunakan data delivery, developer nya bisa membuat aplikasi web yang responsif dan dapat diakses dari berbagai perangkat. Selain itu, dengan menggunakan data delivery, developers dapat membuat aplikasi web yang scalable dan dapat diakses dari berbagai lokasi.
+
+### 2. Pendapat pribadi mengenai yang lebih baik antara XML dan JSON? Mengapa JSON lebih populer dibandingkan XML?
+[Referensi jawaban nomor 2: 
+"https://www.domainesia.com/berita/perbedaan-json-dan-xml/", 
+"https://www.mamika.id/remaja-pendidikan/json-dan-xml-format-data-umum-mana-yang-lebih-unggul-36099"]
+
+Menurut saya, JSON <b>lebih baik</b> daripada XML, karena beberapa alasan yaitu:
+- JSON memiliki sintaks yang lebih sederhana dan ringkas dibandingkan XML. Bentuknya mudah dibaca dan ditulis manusia namun juga mudah untuk diparsing oleh mesin, hal ini membuat JSON menjadi format yang efisien untuk transfer data.
+- Ukuran file JSON cenderung lebih kecil daripada XML, sehingga dapat mempercepat proses transfer data.
+- JSON lebih flexible dalam menangani beberapa jenis data, mulai dari string, integer, boolean, hingga array dan object.
+- Banyak teknologi modern dan API web mendukung JSON secara native. Hal ini membuatnya menjadi pilihan yang lebih mudah untuk diintegrasikan dalam berbagai platform dan bahasa pemrograman. Salah satunya, JSON sudah secara alami terintegrasi dengan JavaScript, sehingga menjadikannya pilihan yang sangat baik untuk pengembangan web.
+
+
+### 3. Fungsi dari method is_valid() pada form Django dan mengapa kita membutuhkan method tersebut?
+- Method `is_valid()` pada form Django adalah fungsi yang digunakan untuk melakukan validasi data yang dikirimkan pengguna melalui form. Fungsi ini memeriksa apakah data yang masuk sesuai dengan kriteria yang telah ditentukan dalam definisi form, seperti tipe data, lalu apakah field tersebut wajib diisi atau tidak (required fields), dan batasan - batasan lain yang kita (developer) tetapkan dalam validasi. `is_valid()` sangat penting karena ia memastikan bahwa data yang masuk ke dalam sistem aman dan dapat diproses tanpa menimbulkan error.
+
+### 4. Mengapa kita membutuhkan csrf_token saat membuat form di Django? Apa yang dapat terjadi jika kita tidak menambahkan csrf_token pada form Django? Bagaimana hal tersebut dapat dimanfaatkan oleh penyerang?
+- Kita membutuhkan csrf_token saat membuat form di Django untuk mencegah serangan `Cross-Site Request Forgery (CSRF)`, di mana penyerang bisa memanipulasi pengguna yang sah untuk melakukan aksi tidak diinginkan di aplikasi web saat pengguna tersebut masih terautentikasi. Jika `csrf_token` tidak ditambahkan pada form Django, aplikasi menjadi rentan terhadap serangan tersebut. Penyerang dapat membuat permintaan berbahaya, seperti mengubah kata sandi atau mengirim email palsu, yang tampak berasal dari pengguna yang sah, karena aplikasi kita tidak dapat memverifikasi bahwa permintaan tersebut benar-benar berasal dari pengguna tersebut.
+
+### 5. Bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
+- ... melanjutkan dari `Tugas Individu 2`
+- membuat skeleton yang berfungsi sebagai kerangka views dari situs web nantinya, dengan cara:
+    - Membuat direktori `templates` pada root folder dan membuat file html baru bernama `base.html` yang nantinya akan di extend oleh template turunan, sehingga tinggal mengganti template tags sesuai kebutuhan di templates turunannya.
+    - Menambahkan `base.html` ke `xoccer_verse/settings.py` di variable `TEMPLATES` supaya `base.html` teridentifikasi sebagai file template.
+    - Pada direktori `main`, saya membuat file baru bernama `forms.py` untuk membuat stuktur form yang dapat menerima data product terbaru dengan:
+        ```
+        from django.forms import ModelForm
+        from main.models import Product
+
+        class ProductForm(ModelForm):
+            class Meta:
+                model = Product
+                fields = ["name", "price", "category", "thumbnail", "is_featured", "stock", "brand", "rating"]
+        ```
+    - Menambahkan import pada `main/views.py` juga meng-update beberapa function yaitu:
+        ```
+        ...
+        from main.forms import ProductForm
+        from main.models import Product
+
+        def show_main(request):
+            context = {
+                ...
+                'product_list' : product_list
+            }
+
+        def create_product(request):
+            ...
+
+        def show_product(request, id):
+            ...
+        ```
+    - Meng-import function function dan menambahkan path URL yang sudah dibuat di `main/vews.py` ke dalam variable `urlpatterns`:
+        ```
+            ...
+            from main.views import show_main, create_product, show_product, show_xml, show_json, show_xml_by_id, show_json_by_id
+
+            ...
+
+            urlpatterns = [
+                ...
+                path('create-product/', create_product, name='create_product'),
+                path('product/<str:id>/', show_product, name='show_product'),
+                path('xml/', show_xml, name='show_xml'),
+                path('json/', show_json, name='show_json'),
+                path('xml/<str:product_id>/', show_xml_by_id, name='show_xml_by_id'),
+                path('json/<str:product_id>/', show_json_by_id, name='show_json_by_id'),
+            ]
+        ```
+    - Menambahkan button `+ Add` yang akan rediret ke halaman form:
+        ```
+            {% if not news_list %}
+            <p>Belum ada data berita pada football news.</p>
+            {% else %}
+
+            {% for news in news_list %}
+            <div>
+            <h2><a href="{% url 'main:show_news' news.id %}">{{ news.title }}</a></h2>
+
+            <p><b>{{ news.get_category_display }}</b>{% if news.is_featured %} | 
+                <b>Featured</b>{% endif %}{% if news.is_news_hot %} | 
+                <b>Hot</b>{% endif %} | <i>{{ news.created_at|date:"d M Y H:i" }}</i> 
+                | Views: {{ news.news_views }}</p>
+
+            {% if news.thumbnail %}
+            <img src="{{ news.thumbnail }}" alt="thumbnail" width="150" height="100">
+            <br />
+            {% endif %}
+
+            <p>{{ news.content|truncatewords:25 }}...</p>
+
+            <p><a href="{% url 'main:show_news' news.id %}"><button>Read More</button></a></p>
+            </div>
+
+            <hr>
+            {% endfor %}
+
+            {% endif %}
+        ```
+    - Membuat dua berkas HTML baru pada direktori `main/templates` untuk halaman form input dan detail produk.
+        1. `create_product.html` : yang berisi `{% csrf_token %}` yg merupakan token yang berfungsi sebagai security dan juga `{{ form.as_table }}` yg merupakan template tag yang digunakan untuk menampilkan fields form yang sudah dibuat pada forms.py sebagai table.
+
+        2. `product_detail.html` : Mengeluarkan tampilan ketika client memencet button `Detail`. 
+    
+    - Menambahkan URL deployment PWS ke `CSRF_TRUSTED_ORIGINS` di `settings.py`
+        ```
+        ...
+        ALLOWED_HOSTS [...]
+
+        CSRF_TRUSTED_ORIGINS = [
+            "https://nisrina-alya-xoccerverse.pbp.cs.ui.ac.id/"
+        ]
+        ```
+
+    - Mengembalikan data dalam bentuk `XML` menggunakan `HttpsResponse` dan `Serializers` juga dalam bentuk `JSON` dengan menambahkan `return function` dengan function:
+        ```
+        def show_xml(request):
+            ...
+
+        def show_json(request):
+            ...
+        ```
+
+    - Mengembalikan Data berdasarkan ID dalam bentuk XML dan JSON dengan  function:
+        ```
+        def show_xml_by_id(request, product_id):
+            ...
+            
+        def show_json_by_id(request, product_id):
+            ...
+        ```
+    
+    - Test `Request` dan `Response` melalui `Postman` (hasil dari `Postman` dilampirkan di akhir)
+
+### 6.  Apakah ada feedback untuk asdos di tutorial 2 yang sudah kalian kerjakan?
+Aman kak, makasih banyak 🙏🙏
+
+## Hasil akses URL pada Postman
+1. Hasil akses URL XML `(http://127.0.0.1:8000/xml)` pada postman:
+![xml](xml.jpg)
+
+2. Hasil akses URL JSON `(http://127.0.0.1:8000/json)` pada postman:
+![json](json.jpg)
+
+3. Hasil akses URL XML by ID `(http://127.0.0.1:8000/xml/[product_id])` pada postman:
+![xml_id](xml_id.jpg)
+
+4. Hasil akses URL JSON by ID`(http://127.0.0.1:8000/json/[product_id])` pada postman:
+![json_id](json_id.jpg)
