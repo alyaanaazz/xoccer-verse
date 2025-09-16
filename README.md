@@ -262,7 +262,22 @@ Menurut saya, JSON <b>lebih baik</b> daripada XML, karena beberapa alasan yaitu:
             {% endif %}
         ```
     - Membuat dua berkas HTML baru pada direktori `main/templates` untuk halaman form input dan detail produk.
-        1. `create_product.html` : yang berisi `{% csrf_token %}` yg merupakan token yang berfungsi sebagai security dan juga `{{ form.as_table }}` yg merupakan template tag yang digunakan untuk menampilkan fields form yang sudah dibuat pada forms.py sebagai table.
+        1. `create_product.html` : yang berisi `{% csrf_token %}` yg merupakan token yang berfungsi sebagai security dan juga `{{ form.as_table }}` yg merupakan template tag yang digunakan untuk menampilkan fields form yang sudah dibuat pada forms.py sebagai table. ada insight dari temen (Raida, PBP C, makasih raida) kalo harga nya harus di validasi :p, jadi saya menambahkan code berikut di `templates/create_product.html` untuk mem-validasi harga yang diinput bukan negative number:
+            ```
+            <script>
+            const priceInput = document.getElementById('id_price');
+
+            if (priceInput) {
+                priceInput.addEventListener('input', function() {
+                if (this.value < 0) {
+                    this.setCustomValidity('Harga produk tidak boleh negatif.');
+                } else {
+                    this.setCustomValidity('');
+                }
+                });
+            }
+            </script>
+            ```
 
         2. `product_detail.html` : Mengeluarkan tampilan ketika client memencet button `Detail`. 
     
