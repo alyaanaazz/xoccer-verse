@@ -278,6 +278,8 @@ Menurut saya, JSON <b>lebih baik</b> daripada XML, karena beberapa alasan yaitu:
             }
             </script>
             ```
+        - jika user menginput negative numbers, forms akan otomatis mengeluarkan info seperti ini:
+        ![alt text](image-1.png)
 
         2. `product_detail.html` : Mengeluarkan tampilan ketika client memencet button `Detail`. 
     
