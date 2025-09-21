@@ -503,7 +503,7 @@ Django Documentation (AuthenticationForm https://docs.djangoproject.com/en/stabl
         return render(request, "main.html", context)
     ```
 - kemudian, kita perlu menambahkan button filter `My` dan `All` pada halaman `main.html`
-- kemudian, kita akan menampilkan nama `author` di `news_detail.html`
+- kemudian, kita akan menampilkan nama `author` di `product_detail.html`
 - last, coba functional test pake selenium... result:
     ```
     (env) D:\FASILKOM UI\xoccer-verse>python manage.py test main.tests.XoccerVerseFunctionalTest 
