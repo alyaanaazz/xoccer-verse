@@ -108,7 +108,7 @@ model ini merepresentasikan barang yang dijual di app saya.
 - Hampir lupa bikin unit test :p, jadi saya melanjutkan bikin Unit Testing untuk menguji halaman utama, menguji jika client mengakses url yang tidak ada maka Django akan mengeluarkan kode `404 (Not Found)`, menguji pembuatan objek item baru dengan atribut tertentu, menguji nilai default dari model Item, menguji fungsionalitas method `increment_views()`, serta menguji properti `is_hot_sale()` dengan 21 views dianggap hot sale.
 
 ### 2. Bagan yang berisi request client ke web aplikasi berbasis Django beserta responnya dan penjelasan kaitan antara urls.py, views.py, models.py, dan berkas html
-![Bagan](image.png)
+![Bagan](readme_images/image.png)
 [Link : https://www.canva.com/design/DAGyAFXXlsM/lKLV6CJ1YqI_PCwj1RIv4Q/edit?utm_content=DAGyAFXXlsM&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton]
 - Setiap request yang masuk akan diproses oleh urls.py dan akan diteruskan ke `views.py` yang sesuai. Jika request berhubungan dengan data, maka `views.py` akan melakukan query ke `models.py` dan `database`. Hasil query akan dikembalikan lagi ke views.py. Setelah itu, hasil yang sudah diperoleh akan dikembalikan lagi ke client dalam bentuk `HTML` sebagai response.
 
@@ -281,7 +281,7 @@ Menurut saya, JSON <b>lebih baik</b> daripada XML, karena beberapa alasan yaitu:
             </script>
             ```
         - jika user menginput negative numbers, forms akan otomatis mengeluarkan info seperti ini:
-        ![alt text](image-1.png)
+        ![alt text](readme_images/image-1.png)
 
         2. `product_detail.html` : Mengeluarkan tampilan ketika client memencet button `Detail`. 
     
@@ -320,19 +320,23 @@ Aman kak, makasih banyak 🙏🙏
 
 ## Hasil akses URL pada Postman
 1. Hasil akses URL XML `(http://127.0.0.1:8000/xml)` pada postman:
-![xml](xml.jpg)
+![xml](readme_images/xml.jpg)
 
 2. Hasil akses URL JSON `(http://127.0.0.1:8000/json)` pada postman:
-![json](json.jpg)
+![json](readme_images/json.jpg)
 
 3. Hasil akses URL XML by ID `(http://127.0.0.1:8000/xml/[product_id])` pada postman:
-![xml_id](xml_id.jpg)
+![xml_id](readme_images/xml_id.jpg)
 
 4. Hasil akses URL JSON by ID`(http://127.0.0.1:8000/json/[product_id])` pada postman:
-![json_id](json_id.jpg)
+![json_id](readme_images/json_id.jpg)
 
 </details>
 
+---
+
+<details>
+<summary><b>Tugas Individu 4</b></summary>
 ## TUGAS INDIVIDU 4
 
 ### 1. Apa itu Django AuthenticationForm? Jelaskan juga kelebihan dan kekurangannya?
@@ -520,3 +524,110 @@ Django Documentation (AuthenticationForm https://docs.djangoproject.com/en/stabl
     Destroying test database for alias 'default'...
     ```
 - Tugas Individu 4 DONEE YAY!!
+</details>
+
+---
+
+## TUGAS INDIVIDU 5
+
+###  Jika terdapat beberapa CSS selector untuk suatu elemen HTML, jelaskan urutan prioritas pengambilan CSS selector tersebut!
+Referensi: PPT PBP 2025/2026, http://w3schools.com/css/css_specificity.asp
+- Selector `Inline Styles` (ex: `<h1 style="color: pink;">`) memiliki tingkat prioritas tertinggi, selector ini akan meng-override selector lainnya.
+- `Id Selector`, (ex: `#navbar`) slector yang menargetkan elemen berdasarkan attribute id-nya, yang dimana masing maisng ID nya unik, hanya boleh ada satu nama ID yang sam adalam satu page HTML.
+- `Class, Attribute, dan Pseudo-class Selectors`. Kelompok ini memiliki tingkat specificity yang sama, yang meliputi:
+    - Class selectors, (`.nama-class`): Menargetkan elemen dengan atribut class tertentu.
+    - Attribute selectors, (`[type="text"]`): Menargetkan elemen berdasarkan atribut dan nilainya.
+    - Pseudo-class selectors (`:hover, :focus`): Menargetkan elemen dalam keadaan tertentu.
+- `Universal selector and :where()` (ex: `*, where()`), dimana universal selector dan :where() tidak berada dalam urutan prioritas.
+
+### Mengapa responsive design menjadi konsep yang penting dalam pengembangan aplikasi web? Berikan contoh aplikasi yang sudah dan belum menerapkan responsive design, serta jelaskan mengapa!
+- Responsive design menjadi sangat penting dalam pengembangan web karena memastikan sebuah situs atau aplikasi web dapat memberikan user experiments yang optimal di berbagai macam device (desktop, handphone, etc.)
+- contoh aplikasi yang sudah menerapkan responsive design: `tiket.com`
+    - tiket.com menampilkan layout yang responsif di setiap device, mislanya sebagai berikut:
+        - Tampilan desktop: Menampilkan layout multi kolom, dimana menu navigasi lengkap di bagian atas di samping search bar. Hal ini memaksimalkan penggunaan ruang pada layar yang lebih lebar dibanding device lainnya.
+        ![alt text](readme_images/tiket_desktop.png)
+
+        - Tampilan mobile : Tampilan secara otomatis berubah menjadi satu kolom. Menu navigasi disederhanakan menjadi ikon "hamburger" (☰) untuk menghemat ruang. Tombol-tombol seperti "Masuk" atau "Daftar" dibuat lebih besar agar mudah disentuh jari. Ukuran font juga disesuaikan agar nyaman dibaca di layar kecil.
+        ![alt text](readme_images/tiket_mobile.png)
+        Ketika menu hamburger di klik : ![alt text](readme_images/tiket_mobile_hamburger.png)
+
+
+
+### Jelaskan perbedaan antara margin, border, dan padding, serta cara untuk mengimplementasikan ketiga hal tersebut!
+- Content: isi dari box (tempat terlihatnya teks dan gambar)
+- Padding: mengosongkan area di sekitar konten (transparan)
+- Border: garis tepian yang membungkus konten dan padding-nya
+- Margin: mengosongkan area di sekitar border (transparan)
+Visualisasi : ![alt text](css_box_model.png)
+
+### Jelaskan konsep flex box dan grid layout beserta kegunaannya!
+- `Flex box` adalah metode layout untuk mengatur item dalam baris atau kolom, flexbox akan memudahkan perancangan struktur layout responsif yang fleksible, tanpa menggunakan float atau pemosisian yang kompleks.
+- `Grid layout` memberikan sistem layout berbasis grid, dengan baris dan kolom. Modul layout grid memungkinkan developer untuk membuat layout web yang kompleks dengan mudah, modul layout grid juga memudahkan dalam merancang struktur tata letak responsif yang sudah didukung di semua modern browsers.
+- `Flex box vs. Grid` : Grid layout sebaiknya digunakan pada layout dua dimensi, dengan baris `DAN` kolom, sedangkan Flex box layout sebaiknya digunakan untuk satu dimensi layout, dengan baris `ATAU` kolom.
+
+###  Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial)!
+- Mengimplementasikan fungsi untuk menghapus dan mengedit product
+    - membuka `views.py` kemudian menambahkan fungsi baru bernama `edit_news` dan `delete_news`.
+    - kemudian, kita perlu menambahkan berkas HTML baru bernama edit_news.html untuk memunculkan form edit
+    - mengimport fungsi yang sebelumnya dibuat ke direktori main dan tambahkan path utl ke urlpatterns untuk mengakses fungsi yang sudah diimpor
+    ```
+    from main.views import edit_news, delete_news
+
+    ...
+        path('product/<uuid:id>/edit', edit_product, name='edit_product'),
+        path('product/<uuid:id>/delete', delete_product, name='delete_product'),
+    ...
+    ```
+    - selanjtnya, kita perlu memunculkan button `edit` dan `delete` di setiap card product di main
+    - button edit dan delete sudah muncul di card product deh... :P
+
+-  Kustomisasi halaman login, register, tambah product, edit product, dan detail product semenarik mungkin.
+    - tambahkan  `middleware WhiteNoise`, agar django dpaat mengelola file statis secara otomatis dalam mode produksi (`DEBUG=False`) tanpa perlu konfigurasi yang kompleks, sehingga file statis bisa diakses di deployment local karena secara default, apabila `DEBUG=False` maka djangi tidak akan menyediakan akses ke file statis.
+    - menambahkan dan memodifikasi file `global.css` pada direktori `/static/css` sesuai dengan style css yang sudah di definisikan sesuai kustomisasi masing-masing.
+    - Agar style CSS yang ditambahkan di global.css dapat digunakna dalam template django, file tersebut perlu ditambahkan ke `base.html`.
+        ```
+        {% load static %}
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+            {% block meta %} {% endblock meta %}
+            <script src="https://cdn.tailwindcss.com"></script>
+            <link rel="stylesheet" href="{% static 'css/global.css' %}"/>
+        </head>
+        <body>
+            {% block content %} {% endblock content %}
+        </body>
+        </html>
+        ```
+    - Untuk memodifikasi halaman login, ubah berkas `login.html` pada subdirektori `main/templates/` sesuai dengan style & selera masing-masing, seperti: `main\templates\login.html`
+    - Untuk memodifikasi halaman register, ubah berkas `register.html` pada subdirektori `main/templates/` sesuai dengan style & selera masing-masing, seperti: `main\templates\register.html`
+    - Untuk memodifikasi halaman tambah produk, ubah berkas `create_product.html` pada subdirektori `main/templates/` sesuai dengan style & selera masing-masing, seperti: `main\templates\create_product.html`
+    - Untuk memodifikasi halaman edit product, ubah berkas `edit_product.html` pada subdirektori `main/templates/` sesuai dengan style & selera masing-masing, seperti: `main\templates\edit_product.html`
+    - Untuk memodifikasi halaman detail product, ubah berkas `product_detail.html` pada subdirektori `main/templates/` sesuai dengan style & selera masing-masing, seperti: `main\templates\product_detail.html`
+
+- Kustomisasi halaman daftar product menjadi lebih menarik dan responsive. Kemudian, perhatikan kondisi berikut:
+    -  Jika pada aplikasi belum ada product yang tersimpan, halaman daftar product akan menampilkan gambar dan pesan bahwa belum ada product yang terdaftar.
+        - yang pertama, memilih foto / icon yang akan ditampilkan ketika belum ada produk yang ditambahkan ke sistem, masukkan ke static/image dengan nama `no-item.png`
+        - setelahnya, `card_product.html` dan `no-item.png` perlu digunakan di template `main.html`, kemudian styling `main.html` ketika tidak ada item yang di tambahkan.
+
+    - Jika sudah ada product yang tersimpan, halaman daftar product akan menampilkan detail setiap product dengan menggunakan card
+        -  buat file card_product pada direktoru main/templates lalu tambahkan code html yang emmuat thumbnail, category badge, nama product, harga product, status hot sale, action buttons yang berupa edit dan delete.
+        - kemudian, jika product nya masih kosong (belum ada satupun proct), tambahkan satu empty icon.
+        - selajutnya modifikasi main.htmlm untuk mengatur header section, filter section, dan products grid.
+        - kemudian styling bagian product detail di product_detail.html untuk memberikan style di back navigation, product article, header dari product article nya, thumbanil, full description, dan seller info.
+
+    - Buatlah navigation bar (navbar) untuk fitur-fitur pada aplikasi yang responsive terhadap perbedaan ukuran device, khususnya mobile dan desktop.
+        - buat berkas html baru bernama navbar.html, kemudian isi dengan contoh di tutorial, kemudian navar tersebut perlu ditautkan ke dalam amin.html yang berada di dalam main/templates/ dengan menggunakan tags `include`
+            ```
+            {% extends 'base.html' %}
+            {% block content %}
+            {% include 'navbar.html' %}
+            ...
+            {% endblock content%}
+            ```
+        - setelah membuat navbar dasar, sekarang bisa diberikan styling pada base navbar sebelumnya, styling dibebaskan sesuai preferensi developer.
+        - styking navbar yang saya gunakan menggunakan Tailwind CSS dengan posisi fixed di atas halaman, struktur navbar terdiri dari title di kiri, menu navigasi di tengah, dan user section di kanan. pada tampilan mobile, menu navigasi nya akan disembunyikan dan diganti dengan tombol hamburge, javaScript digunakan untuk menampilkan/menyembunyikan mobile menu saat tombol diklik.
+
+- tugas 5 done :p

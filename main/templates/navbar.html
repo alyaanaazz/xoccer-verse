@@ -1,0 +1,166 @@
+<nav class="fixed top-0 left-0 w-full bg-white border-b border-gray-200 shadow-sm z-50">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16">
+            <div class="flex items-center">
+                <h1 class="text-xl font-semibold text-gray-900">
+                    <a href="/" class="hover:text-pink-600 transition-colors">
+                        <span class="text-pink-600">Xoccer</span> Verse
+                    </a>
+                </h1>
+            </div>
+
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="/" class="text-gray-600 hover:text-gray-900 font-medium transition-colors">
+                    Home
+                </a>
+
+                <div class="relative dropdown-container">
+                  <button class="dropdown-button flex items-center text-gray-600 hover:text-gray-900 font-medium transition-colors">
+                      <span>Categories</span>
+                      <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                  </button>
+                  <div class="dropdown-menu hidden absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50">
+                      
+                      {% for value, display_name in product_categories %}
+                          <a href="{% url 'main:filter_by_category' value %}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                              {{ display_name }}
+                          </a>
+                      {% endfor %}
+                      
+                  </div>
+              </div>
+
+
+                <div class="relative dropdown-container">
+                    <button class="dropdown-button flex items-center text-gray-600 hover:text-gray-900 font-medium transition-colors">
+                        <span>Brands</span>
+                        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div class="dropdown-menu hidden absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50">
+                        
+                        {% if unique_brands %}
+                            {% for brand in unique_brands %}
+                                <a href="{% url 'main:filter_by_brand' brand %}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                    {{ brand }}
+                                </a>
+                            {% endfor %}
+                        {% else %}
+                            <span class="block px-4 py-2 text-sm text-gray-400">No brands found</span>
+                        {% endif %}
+                          
+                      </div>
+                  </div>
+            </div>
+
+            <div class="hidden md:flex items-center space-x-6">
+                {% if user.is_authenticated %}
+                <div class="text-right">
+                    <div class="text-sm font-medium text-gray-900">{{ name|default:user.username }}</div>
+                    <div class="text-xs text-gray-500">{{ npm|default:"Student" }} - {{ class|default:"Class" }}</div>
+                </div>
+                <a href="{% url 'main:logout' %}" class="text-red-600 hover:text-red-700 font-medium transition-colors">
+                    Logout
+                </a>
+                {% else %}
+                <a href="{% url 'main:login' %}" class="text-gray-600 hover:text-gray-900 font-medium transition-colors">
+                    Login
+                </a>
+                <a href="{% url 'main:register' %}" class="bg-pink-600 hover:bg-pink-700 text-white px-4 py-2 rounded font-medium transition-colors">
+                    Register
+                </a>
+                {% endif %}
+            </div>
+
+            <div class="md:hidden flex items-center">
+                <button class="mobile-menu-button p-2 text-gray-600 hover:text-gray-900 transition-colors">
+                    <span class="sr-only">Open menu</span>
+                    <div class="w-6 h-6 flex flex-col justify-center items-center">
+                        <span class="bg-current block transition-all duration-300 ease-out h-0.5 w-6 rounded-sm"></span>
+                        <span class="bg-current block transition-all duration-300 ease-out h-0.5 w-6 rounded-sm my-0.5"></span>
+                        <span class="bg-current block transition-all duration-300 ease-out h-0.5 w-6 rounded-sm"></span>
+                    </div>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="mobile-menu hidden md:hidden bg-white border-t border-gray-200">
+      <div class="px-6 py-4 space-y-4">
+          <div class="space-y-1">
+              <a href="{% url 'main:show_main' %}" class="block text-gray-600 hover:text-gray-900 font-medium py-3 transition-colors">
+                  Home
+              </a>
+
+              <h3 class="font-semibold text-gray-800 pt-3 border-b pb-2 mb-1">Brands</h3>
+              {% for brand in unique_brands %}
+                  <a href="{% url 'main:filter_by_brand' brand %}" class="block pl-4 text-gray-600 hover:text-gray-900 font-medium py-2 transition-colors">
+                      {{ brand }}
+                  </a>
+              {% endfor %}
+
+              <h3 class="font-semibold text-gray-800 pt-3 border-b pb-2 mb-1">Categories</h3>
+              {% for value, display_name in product_categories %}
+                  <a href="{% url 'main:filter_by_category' value %}" class="block pl-4 text-gray-600 hover:text-gray-900 font-medium py-2 transition-colors">
+                      {{ display_name }}
+                  </a>
+              {% endfor %}
+          </div>
+
+          <div class="border-t border-gray-200 pt-4">
+              {% if user.is_authenticated %}
+              <div class="mb-4">
+                  <div class="font-medium text-gray-900">{{ user.username }}</div>
+              </div>
+              <a href="{% url 'main:logout' %}" class="block text-red-600 hover:text-red-700 font-medium py-3 transition-colors">
+                  Logout
+              </a>
+              {% else %}
+              <div class="space-y-3">
+                  <a href="{% url 'main:login' %}" class="block text-gray-600 hover:text-gray-900 font-medium py-3 transition-colors">
+                      Login
+                  </a>
+                  <a href="{% url 'main:register' %}" class="block bg-pink-600 hover:bg-pink-700 text-white font-medium py-3 px-4 rounded text-center transition-colors">
+                      Register
+                  </a>
+              </div>
+              {% endif %}
+          </div>
+      </div>
+    </div>
+    
+    <script>
+        // Mobile Menu Hamburger Customization
+        const mobileMenuButton = document.querySelector("button.mobile-menu-button");
+        const mobileMenu = document.querySelector(".mobile-menu");
+
+        mobileMenuButton.addEventListener("click", () => {
+            mobileMenu.classList.toggle("hidden");
+        });
+
+        const dropdownButtons = document.querySelectorAll(".dropdown-button");
+
+        dropdownButtons.forEach(button => {
+            button.addEventListener("click", (e) => {
+                e.stopPropagation(); 
+                
+                const menu = button.nextElementSibling;
+                
+                document.querySelectorAll('.dropdown-menu').forEach(otherMenu => {
+                    if (otherMenu !== menu) {
+                        otherMenu.classList.add('hidden');
+                    }
+                });
+
+                menu.classList.toggle("hidden");
+            });
+        });
+
+        window.addEventListener('click', (e) => {
+            document.querySelectorAll('.dropdown-menu').forEach(menu => {
+                if (!menu.parentElement.contains(e.target)) {
+                    menu.classList.add('hidden');
+                }
+            });
+        });
+    </script>
+</nav>

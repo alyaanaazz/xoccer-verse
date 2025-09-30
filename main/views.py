@@ -117,3 +117,44 @@ def logout_user(request):
     response = HttpResponseRedirect(reverse('main:login'))
     response.delete_cookie('last_login')
     return response
+
+def edit_product(request, id):
+    product = get_object_or_404(Product, pk=id)
+    form = ProductForm(request.POST or None, instance=product)
+    if form.is_valid() and request.method == 'POST':
+        form.save()
+        return redirect('main:show_main')
+
+    context = {
+        'form': form
+    }
+
+    return render(request, "edit_product.html", context)
+
+def delete_product(request, id):
+    product = get_object_or_404(Product, pk=id)
+    product.delete()
+    return HttpResponseRedirect(reverse('main:show_main'))
+
+def filter_by_brand_view(request, brand_name):
+    products_by_brand = Product.objects.filter(brand=brand_name)
+    
+    context = {
+        'brand_name': brand_name,
+        'products': products_by_brand,
+    }
+    
+    return render(request, 'products_by_brand.html', context)
+
+def filter_by_category_view(request, category_value):
+    products_by_category = Product.objects.filter(category=category_value)
+    
+    category_choices_dict = dict(Product._meta.get_field('category').choices)
+    category_name = category_choices_dict.get(category_value, 'Unknown Category')
+
+    context = {
+        'category_name': category_name,
+        'products': products_by_category,
+    }
+    
+    return render(request, 'products_by_category.html', context)

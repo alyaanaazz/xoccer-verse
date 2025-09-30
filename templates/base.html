@@ -5,9 +5,29 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     {% block meta %} {% endblock meta %}
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="{% static 'css/global.css' %}"/>
+    <script src="//unpkg.com/alpinejs" defer></script>
 </head>
 
 <body>
     {% block content %} {% endblock content %}
+    </main>
+
+    {% if user.is_authenticated %}
+    <a href="{% url 'main:create_product' %}" 
+       title="Add New Product"
+       class="fixed bottom-8 right-8 z-50 flex items-center justify-center w-16 h-16 bg-pink-600 rounded-full shadow-lg hover:bg-pink-700 transition-colors duration-300 ease-in-out">
+        
+        <svg class="w-8 h-8 text-white" 
+             xmlns="http://www.w3.org/2000/svg" 
+             fill="none" 
+             viewBox="0 0 24 24" 
+             stroke-width="2.5" 
+             stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+        </svg>
+    </a>
+    {% endif %}
 </body>
 </html>
