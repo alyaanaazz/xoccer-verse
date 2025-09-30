@@ -45,7 +45,7 @@
                 {{ product.get_category_display }}
             </span>
             {% if product.is_on_sale %}
-              <span class="inline-flex items-center px-2 py-1 bg-red-600 text-white font-bold text-sm"> 
+              <span class="inline-flex items-center px-2 py-1 rounded-md bg-red-600 text-white font-semibold text-xs"> 
                   -{{ product.discount }}%
               </span>
             {% endif %}
@@ -56,7 +56,7 @@
                 </a>
             </h3>
 
-            <p class="text-gray-600 text-sm leading-relaxed line-clamp-3">
+            <p class="text-gray-600 text-sm leading-relaxed line-clamp-3 hidden sm:block">
                 {{ product.description|truncatewords:15 }}
             </p>
         </div>
