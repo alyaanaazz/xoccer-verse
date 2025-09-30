@@ -2,7 +2,7 @@
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
         <div class="flex items-center justify-between h-16">
             <div class="flex items-center">
-                <h1 class="text-xl font-semibold text-gray-900">
+                <h1 class="text-xl font-bold text-gray-900">
                     <a href="/" class="hover:text-pink-600 transition-colors">
                         <span class="text-pink-600">Xoccer</span> Verse
                     </a>
@@ -55,7 +55,7 @@
             <div class="hidden md:flex items-center space-x-6">
                 {% if user.is_authenticated %}
                 <div class="text-right">
-                    <div class="text-sm font-medium text-gray-900">{{ name|default:user.username }}</div>
+                    <div class="text-sm font-bold text-gray-900">{{ name|default:user.username }}</div>
                     <div class="text-xs text-gray-500">{{ npm|default:"Student" }} - {{ class|default:"Class" }}</div>
                 </div>
                 <a href="{% url 'main:logout' %}" class="text-red-600 hover:text-red-700 font-medium transition-colors">
