@@ -528,6 +528,9 @@ Django Documentation (AuthenticationForm https://docs.djangoproject.com/en/stabl
 
 ---
 
+<details>
+<summary><b>Tugas Individu 5</b></summary>
+
 ## TUGAS INDIVIDU 5
 
 ###  Jika terdapat beberapa CSS selector untuk suatu elemen HTML, jelaskan urutan prioritas pengambilan CSS selector tersebut!
@@ -631,3 +634,36 @@ Visualisasi : ![alt text](css_box_model.png)
         - styking navbar yang saya gunakan menggunakan Tailwind CSS dengan posisi fixed di atas halaman, struktur navbar terdiri dari title di kiri, menu navigasi di tengah, dan user section di kanan. pada tampilan mobile, menu navigasi nya akan disembunyikan dan diganti dengan tombol hamburge, javaScript digunakan untuk menampilkan/menyembunyikan mobile menu saat tombol diklik.
 
 - tugas 5 done :p
+</details>
+
+---
+
+## TUGAS INDIVIDU 6
+
+### Apa perbedaan antara synchronous request dan asynchronous request?
+- Perbedaan mendasar dari `synchronus request` dan `asynchronous request` adalah ada pada bagaimana aplikasi atau client (browser atau aplikasi seluler) mengelola thread eksekusinya setelah permintaan ke server di kirimkan. 
+- `synchronus request` berlaku dengan pola blocking, dimana ketika client mengirim request ke server, thread eksekusi client akan terhenti total atau "diblokir." Client harus menunggu server selesai memproses permintaan, mengirimkan respons, dan client menerima respons tersebut, sebelum client dapat melanjutkan tugas atau aktivitas lain.
+- Implikasi nya pada user experience:
+    - Full page reload: Di web terdahulu, synchronus request sering memicu full page reload, yang berarti seluruh tampilan (DOM) di-render ulang.
+    - Loading yang dirasakan: Selama proses loading ini, browser jadi sering keliatan nge-freeze atau user tidak dapat berinteraksi dengan elemen lain di halaman. Ini menciptakan keterlambatan yang dirasakan dan pengalaman yang kurang mulus, karena pengguna harus menunggu loading selesai.
+    - Contoh: Sending form HTML biasa atau mengklik tautan biasa yang memuat halaman baru.
+ - `asynchronus request` adalah request yang berlaku dengan pola non-blocking. Ketika client mengirimkan request ke server, thread eksekusi tidak berjenti, sehingga client dapat segera melanjutkan aktivitas yang lain (misalnya, user tetap bisa scroll halaman atau mengklik elemen lain).
+    - Keunggulan pada Pengalaman Pengguna (UX):
+        - Responsivitas Tinggi: Halaman terasa lebih atau bahkan sangat cepat dan responsif karena pengguna tidak mengalami interupsi loading yang mengganggu.
+        - Partial updates: Hanya konten yang relevan yang diperbarui, menghemat waktu loading dan bandwidth.
+        - Continue interaction: User bisa terus berinteraksi dengan interface.
+    - Contoh: Fitur "Like" yang diperbarui secara instan, live search yang menampilkan hasil saat kita mengetik, atau loading komentar baru tanpa harus me-refresh halaman.
+
+### Bagaimana AJAX bekerja di Django (alur request-response)?
+- AJAX bekerja di Django dengan memfasilitasi komunikasi antara backend dan frontend yang ringan. Alurnya dimulai ketika JavaScript di sisi klien mengirimkan request asinkron ke URL tertentu di server Django, biasanya dipicu oleh user action. Django menerima request ini dan kemudian melalui mapping URL-nya, akan mengarahkannya ke fungsi view yang sesuai. View ini kemudian akan memproses data yang dikirim, berinteraksi dengan database jika diperlukan, namun tidak me-render full dari template HTML. Sebagai gantinya, view membuat respons yang ringkas, paling sering dalam format JSON (JavaScript Object Notation), dan mengirimkannya kembali ke client. JavaScript di client kemudian menerima respons JSON ini dan menggunakannya untuk secara dinamis meng-update hanya bagian spesifik dari Document Object Model (DOM) halaman.
+
+### Apa keuntungan menggunakan AJAX dibandingkan render biasa di Django?
+- USer tidak perlu menunggu halaman di reload sepenuhnya, menghasilkan interaksi yang lebih cepat dan responsif, mirip dengan desktop app. Hal ini juga menghemat bandwidth karena hanya data penting (JSON) yang ditransfer, bukan seluruh markup HTML dan assets lainnya. Secara struktural, AJAX mendukung pemisahan concern yang lebih baik antara logika backend (data dan Django view) dan logika frontend (tampilan dan JavaScript), membuat kode lebih terstruktur dan mudah dikelola.
+
+### Bagaimana cara memastikan keamanan saat menggunakan AJAX untuk fitur Login dan Register di Django?
+- Pertama dan yang plaing penting adalah selalu gunakan HTTPS untuk mengenkripsi semua data sensitif yang ditransfer. Kedua, setiap request AJAX yang memodifikasi data (seperti form Login/Register) harus menyertakan CSRF token yang divalidasi oleh Django untuk mencegah serangan Cross-Site Request Forgery. Selain itu, validasi data yang ketat harus dilakukan di sisi server (Django view), yang artinya data yang berasal dari client tidak boleh dipercaya, dan terakhir, menerapkan teknik keamanan seperti rate limiting pada endpoint autentikasi untuk meminimalisir risiko Brute Force Attack.
+
+### Bagaimana AJAX mempengaruhi pengalaman pengguna (User Experience) pada website?
+- AJAX telah merevolusi User Experience (UX) dengan membuat website yang terasa lebih dinamis dan interaktif, yang ditunjukkan dengan dampak terbesarnya yaitu kelancaran dan kecepatan, karena AJAX menghilangkan gangguan dan waktu tunggu yang disebabkan oleh full page reload. User menerima update instan dan feedback cepat saat melakukan action, seperti meng-click tombol like atau mengisi sebagian formulir, hal ini juga memungkinkan fitur-fitur modern seperti infinite scrolling dan auto-suggest pada kolom pencarian., secara keseluruhan, AJAX akan mengangkat kualitas interaksi, memberikan pengalaman yang lebih konsisten dan mulus yang sangat menyerupai desktop app daripada sekadar static document :)))
+
+tugas indivisu 6 done :p

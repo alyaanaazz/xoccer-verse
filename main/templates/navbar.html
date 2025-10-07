@@ -1,66 +1,93 @@
+{% load static %}
 <nav class="fixed top-0 left-0 w-full bg-white border-b border-gray-200 shadow-sm z-50">
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
         <div class="flex items-center justify-between h-16">
+
             <div class="flex items-center">
                 <h1 class="text-xl font-bold text-gray-900">
                     <a href="/" class="hover:text-pink-600 transition-colors">
                         <span class="text-pink-600">Xoccer</span> Verse
                     </a>
                 </h1>
-            </div>
+                
+                <div class="hidden md:flex items-center ml-8 space-x-4">
+                    <a href="/" class="text-gray-600 hover:text-gray-900 font-medium transition-colors">
+                        Home
+                    </a>
 
-            <div class="hidden md:flex items-center space-x-8">
-                <a href="/" class="text-gray-600 hover:text-gray-900 font-medium transition-colors">
-                    Home
-                </a>
-
-                <div class="relative dropdown-container">
-                  <button class="dropdown-button flex items-center text-gray-600 hover:text-gray-900 font-medium transition-colors">
-                      <span>Categories</span>
-                      <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                  </button>
-                  <div class="dropdown-menu hidden absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50">
-                      
-                      {% for value, display_name in product_categories %}
-                          <a href="{% url 'main:filter_by_category' value %}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                              {{ display_name }}
-                          </a>
-                      {% endfor %}
-                      
-                  </div>
-              </div>
-
-
-                <div class="relative dropdown-container">
-                    <button class="dropdown-button flex items-center text-gray-600 hover:text-gray-900 font-medium transition-colors">
-                        <span>Brands</span>
-                        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                    </button>
-                    <div class="dropdown-menu hidden absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50">
-                        
-                        {% if unique_brands %}
-                            {% for brand in unique_brands %}
-                                <a href="{% url 'main:filter_by_brand' brand %}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                                    {{ brand }}
+                    <div class="relative dropdown-container">
+                        <button class="dropdown-button flex items-center text-gray-600 hover:text-gray-900 font-medium transition-colors">
+                            <span>Categories</span>
+                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div class="dropdown-menu hidden absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50">
+                            {% for value, display_name in product_categories %}
+                                <a href="{% url 'main:filter_by_category' value %}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                    {{ display_name }}
                                 </a>
                             {% endfor %}
-                        {% else %}
-                            <span class="block px-4 py-2 text-sm text-gray-400">No brands found</span>
-                        {% endif %}
-                          
-                      </div>
-                  </div>
+                        </div>
+                    </div>
+
+                    <div class="relative dropdown-container">
+                        <button class="dropdown-button flex items-center text-gray-600 hover:text-gray-900 font-medium transition-colors">
+                            <span>Brands</span>
+                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div class="dropdown-menu hidden absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50">
+                            {% if unique_brands %}
+                                {% for brand in unique_brands %}
+                                    <a href="{% url 'main:filter_by_brand' brand %}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                        {{ brand }}
+                                    </a>
+                                {% endfor %}
+                            {% else %}
+                                <span class="block px-4 py-2 text-sm text-gray-400">No brands found</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <div class="hidden md:flex items-center space-x-6">
+            <div class="hidden md:flex items-center space-x-4"> <form action="{% url 'main:show_main' %}" method="GET" class="w-64" id="search-form"> <div class="relative">
+                        <input type="search" name="q" id="search-input" placeholder="Search products..." 
+                            class="w-full pl-3 pr-10 py-2 border border-pink-600 rounded-full focus:outline-none focus:ring-1 focus:ring-pink-600 focus:border-pink-600 transition-colors text-sm"
+                            value="{{ request.GET.q|default:'' }}">
+                        
+                        <button type="submit" class="absolute right-0 top-1/2 transform -translate-y-1/2 mr-3 text-pink-600 hover:text-pink-700">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                        </button>
+                    </div>
+                </form>
+
                 {% if user.is_authenticated %}
-                <div class="text-right">
-                    <div class="text-sm font-bold text-gray-900">{{ name|default:user.username }}</div>
-                    <div class="text-xs text-gray-500">{{ npm|default:"Student" }} - {{ class|default:"Class" }}</div>
+                <div class="relative dropdown-container flex items-center">
+                    <button class="dropdown-button p-1 transition-colors rounded-full focus:outline-none focus:ring-2 focus:ring-pink-600" aria-expanded="false">
+                        <img src="{% static 'image/profile-icon.png' %}" 
+                             alt="Profile" 
+                             class="w-10 h-10" style="filter: invert(30%) sepia(0%) saturate(0%) hue-rotate(360deg) brightness(50%) contrast(80%);">
+                    </button>
+                    
+                    <div class="dropdown-menu hidden absolute right-0 mt-2 w-64 bg-white rounded-lg shadow-xl py-1 z-50 border border-gray-100">
+                        <div class="px-4 py-3 flex items-center space-x-3">
+                            <svg class="w-8 h-8 text-pink-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            </svg>
+                            <div>
+                                <p class="text-base font-extrabold text-gray-900 leading-tight">{{ name|default:user.username }}</p>
+                                <p class="text-xs text-gray-500 mt-0.5">{{ npm|default:"Student" }} - {{ class|default:"Class" }}</p>
+                            </div>
+                        </div>
+                        <div class="h-px bg-gray-100 mx-1 my-1"></div>
+                        
+                        <a href="#" onclick="logoutAjax(event)" class="flex items-center px-4 py-2 text-sm text-red-600 hover:bg-red-50 hover:text-red-700 transition-colors">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
+                            </svg>
+                            Logout
+                        </a>
+                    </div>
                 </div>
-                <a href="{% url 'main:logout' %}" class="text-red-600 hover:text-red-700 font-medium transition-colors">
-                    Logout
-                </a>
                 {% else %}
                 <a href="{% url 'main:login' %}" class="text-gray-600 hover:text-gray-900 font-medium transition-colors">
                     Login
@@ -85,51 +112,54 @@
     </div>
 
     <div class="mobile-menu hidden md:hidden bg-white border-t border-gray-200">
-      <div class="px-6 py-4 space-y-4">
-          <div class="space-y-1">
-              <a href="{% url 'main:show_main' %}" class="block text-gray-600 hover:text-gray-900 font-medium py-3 transition-colors">
-                  Home
-              </a>
+        <div class="px-6 py-4 space-y-4">
+            <div class="space-y-1">
+                <a href="{% url 'main:show_main' %}" class="block text-gray-600 hover:text-gray-900 font-medium py-3 transition-colors">
+                    Home
+                </a>
 
-              <h3 class="font-semibold text-gray-800 pt-3 border-b pb-2 mb-1">Brands</h3>
-              {% for brand in unique_brands %}
-                  <a href="{% url 'main:filter_by_brand' brand %}" class="block pl-4 text-gray-600 hover:text-gray-900 font-medium py-2 transition-colors">
-                      {{ brand }}
-                  </a>
-              {% endfor %}
+                <h3 class="font-semibold text-gray-800 pt-3 border-b pb-2 mb-1">Brands</h3>
+                {% for brand in unique_brands %}
+                    <a href="{% url 'main:filter_by_brand' brand %}" class="block pl-4 text-gray-600 hover:text-gray-900 font-medium py-2 transition-colors">
+                        {{ brand }}
+                    </a>
+                {% endfor %}
 
-              <h3 class="font-semibold text-gray-800 pt-3 border-b pb-2 mb-1">Categories</h3>
-              {% for value, display_name in product_categories %}
-                  <a href="{% url 'main:filter_by_category' value %}" class="block pl-4 text-gray-600 hover:text-gray-900 font-medium py-2 transition-colors">
-                      {{ display_name }}
-                  </a>
-              {% endfor %}
-          </div>
+                <h3 class="font-semibold text-gray-800 pt-3 border-b pb-2 mb-1">Categories</h3>
+                {% for value, display_name in product_categories %}
+                    <a href="{% url 'main:filter_by_category' value %}" class="block pl-4 text-gray-600 hover:text-gray-900 font-medium py-2 transition-colors">
+                        {{ display_name }}
+                    </a>
+                {% endfor %}
+            </div>
 
-          <div class="border-t border-gray-200 pt-4">
-              {% if user.is_authenticated %}
-              <div class="mb-4">
-                  <div class="font-medium text-gray-900">{{ user.username }}</div>
-              </div>
-              <a href="{% url 'main:logout' %}" class="block text-red-600 hover:text-red-700 font-medium py-3 transition-colors">
-                  Logout
-              </a>
-              {% else %}
-              <div class="space-y-3">
-                  <a href="{% url 'main:login' %}" class="block text-gray-600 hover:text-gray-900 font-medium py-3 transition-colors">
-                      Login
-                  </a>
-                  <a href="{% url 'main:register' %}" class="block bg-pink-600 hover:bg-pink-700 text-white font-medium py-3 px-4 rounded text-center transition-colors">
-                      Register
-                  </a>
-              </div>
-              {% endif %}
-          </div>
-      </div>
+            <div class="border-t border-gray-200 pt-4">
+                {% if user.is_authenticated %}
+                <div class="mb-4">
+                    <div class="font-medium text-gray-900">{{ user.username }}</div>
+                    <div class="text-sm text-gray-500">{{ npm|default:"Student" }} - {{ class|default:"Class" }}</div>
+                </div>
+                <a href="{% url 'main:logout' %}" class="flex items-center space-x-2 text-red-600 hover:text-red-700 font-medium py-3 transition-colors">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
+                    </svg>
+                    <span>Logout</span>
+                </a>
+                {% else %}
+                <div class="space-y-3">
+                    <a href="{% url 'main:login' %}" class="block text-gray-600 hover:text-gray-900 font-medium py-3 transition-colors">
+                        Login
+                    </a>
+                    <a href="{% url 'main:register' %}" class="block bg-pink-600 hover:bg-pink-700 text-white font-medium py-3 px-4 rounded text-center transition-colors">
+                        Register
+                    </a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
     </div>
     
     <script>
-        // Mobile Menu Hamburger Customization
         const mobileMenuButton = document.querySelector("button.mobile-menu-button");
         const mobileMenu = document.querySelector(".mobile-menu");
 
@@ -162,5 +192,72 @@
                 }
             });
         });
+
+
+        const searchInput = document.getElementById('search-input');
+        const clearButton = document.getElementById('clear-search');
+        
+        if (searchInput && clearButton) {
+            const toggleClearButton = () => {
+                if (searchInput.value) {
+                    clearButton.classList.remove('hidden');
+                } else {
+                    clearButton.classList.add('hidden');
+                }
+            };
+
+            toggleClearButton();
+
+            searchInput.addEventListener('input', toggleClearButton);
+
+            clearButton.addEventListener('click', () => {
+                searchInput.value = '';
+                searchInput.focus(); 
+                clearButton.classList.add('hidden'); 
+            });
+        }
+
+
+        // AJAX Logout
+        async function logoutAjax(event) {
+            event.preventDefault();
+
+            try {
+                const response = await fetch("{% url 'main:logout' %}", {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRFToken': getCookie('csrftoken'), 
+                        'X-Requested-With': 'XMLHttpRequest',
+                    }
+                });
+
+                if (response.ok) {
+                    alert('You have been successfully logged out.');
+                    setTimeout(() => {
+                        window.location.href = "{% url 'main:login' %}";
+                    }, 100);
+                } else {
+                    alert('Logout Failed: Could not complete logout action.');
+                }
+            } catch (error) {
+                console.error('Logout AJAX Error:', error);
+                alert('System Error: Could not connect to server for logout.');
+            }
+        }
+        
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    let cookie = cookies[i].trim();
+                    if (cookie.startsWith(name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
     </script>
 </nav>

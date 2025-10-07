@@ -54,10 +54,9 @@
                 {{ field.as_widget.attrs.cols }}
                 {{ field }}
               {% endif %}
-
             </div>
             {% if field.help_text %}
-              <p class="mt-1 text-sm text-gray-500">{{ field.help_text }}</p>
+              <p class="mt-1 text-sm text-gray-600">{{ field.help_text }}</p>
             {% endif %}
             {% for error in field.errors %}
               <p class="mt-1 text-sm text-red-600">{{ error }}</p>
